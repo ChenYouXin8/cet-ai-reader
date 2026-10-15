@@ -15,6 +15,16 @@
 
 ---
 
+## 界面预览 · Screenshots
+
+**沉浸式三栏布局**：左栏题库导航 · 中栏真题正文 · 右栏 AI 解析侧边栏（含快捷追问胶囊）
+![三栏精读界面](docs/screenshot-ai.png)
+
+**真题精读**：内置 24 篇历年真题，点击任意单词即时查词、点击句子触发长难句精析
+![真题精读界面](docs/screenshot-main.png)
+
+---
+
 ## English
 
 ### Overview
