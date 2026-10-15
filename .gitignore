@@ -1,0 +1,19 @@
+node_modules
+dist
+dist-ssr
+.DS_Store
+*.local
+.vite
+
+# 题库原始仓库（由 scripts/fetch-and-parse-exams.js 自动克隆）
+data/raw-repo
+
+# 环境变量：真实密钥只保存在本地 .env，任何 .env.* 变体都禁止提交
+# （.env.example 为纯占位模板，需要保留在仓库中）
+.env
+.env.*
+!.env.example
+
+logs
+*.log
+npm-debug.log*

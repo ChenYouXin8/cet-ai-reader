@@ -1,0 +1,30 @@
+{
+  "name": "cet-ai-reader",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "英语四六级真题精读与 AI 解析 · 本地 Web 阅读应用",
+  "scripts": {
+    "start": "node scripts/fetch-and-parse-exams.js && vite",
+    "dev": "vite",
+    "sync:exams": "node scripts/fetch-and-parse-exams.js",
+    "answers": "node scripts/generate-answer-key.js",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "lucide-vue-next": "^0.577.0",
+    "markdown-it": "^15.0.2",
+    "vue": "^3.5.44"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/markdown-it": "^14.2.0",
+    "@types/node": "^26.6.5",
+    "@vitejs/plugin-vue": "^6.0.10",
+    "tailwindcss": "^4.3.3",
+    "typescript": "5.9",
+    "vite": "^8.3.4",
+    "vue-tsc": "^3.3.13"
+  }
+}

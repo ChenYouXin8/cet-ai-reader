@@ -1,0 +1,434 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Inter', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', system-ui, sans-serif;
+  --font-reading: 'Merriweather', Georgia, 'Times New Roman', 'Songti SC', serif;
+
+  /* 纸张色（明亮主题） */
+  --color-paper-50: #faf8f4;
+  --color-paper-100: #f2eee5;
+  --color-paper-200: #e5dfd2;
+  --color-paper-300: #d5cdba;
+
+  /* 墨色（深色主题） */
+  --color-ink-950: #0f1115;
+  --color-ink-900: #15181d;
+  --color-ink-800: #1c2027;
+  --color-ink-700: #262b34;
+  --color-ink-600: #333945;
+}
+
+@layer base {
+  html,
+  body,
+  #app {
+    height: 100%;
+    margin: 0;
+  }
+
+  body {
+    background-color: var(--color-paper-50);
+    color: #292524;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .dark body {
+    background-color: var(--color-ink-900);
+    color: #e7e5e4;
+  }
+}
+
+/* ---------------- 主精读区排版：衬线字体 · 18px · 行高 1.8 ---------------- */
+.reading-body {
+  font-family: var(--font-reading);
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.sentence {
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background-color 0.15s ease;
+}
+
+.sentence:hover {
+  background-color: rgb(217 119 6 / 0.12);
+}
+
+.sentence.is-active {
+  background-color: rgb(217 119 6 / 0.22);
+  box-shadow: inset 0 -1px 0 rgb(180 83 9 / 0.55);
+}
+
+.dark .sentence:hover {
+  background-color: rgb(251 191 36 / 0.12);
+}
+
+.dark .sentence.is-active {
+  background-color: rgb(251 191 36 / 0.2);
+  box-shadow: inset 0 -1px 0 rgb(251 191 36 / 0.5);
+}
+
+/* 句子头部「整句精析」图标：悬停出现，绝对定位以免影响正文排版 */
+.sentence {
+  position: relative;
+}
+
+.sentence-icon {
+  position: absolute;
+  left: -17px;
+  top: 0.35em;
+  display: inline-flex;
+  height: 15px;
+  width: 15px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  color: rgb(180 83 9);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.sentence:hover .sentence-icon {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.sentence-icon:hover {
+  background-color: rgb(217 119 6 / 0.2);
+}
+
+.dark .sentence-icon {
+  color: rgb(251 191 36);
+}
+
+.dark .sentence-icon:hover {
+  background-color: rgb(251 191 36 / 0.22);
+}
+
+/* ---------------- 细滚动条 ---------------- */
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(120 113 108 / 0.35) transparent;
+}
+
+.scroll-thin::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scroll-thin::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scroll-thin::-webkit-scrollbar-thumb {
+  background-color: rgb(120 113 108 / 0.35);
+  border-radius: 999px;
+}
+
+.scroll-thin::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(120 113 108 / 0.55);
+}
+
+/* ---------------- AI 解析 Markdown 排版 ---------------- */
+.md-body {
+  font-size: 13.5px;
+  line-height: 1.75;
+  word-break: break-word;
+}
+
+.md-body > *:first-child {
+  margin-top: 0;
+}
+
+.md-body h1,
+.md-body h2,
+.md-body h3,
+.md-body h4 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 1.05em 0 0.5em;
+  padding-left: 0.55em;
+  border-left: 3px solid rgb(217 119 6 / 0.75);
+  color: #b45309;
+}
+
+.dark .md-body h1,
+.dark .md-body h2,
+.dark .md-body h3,
+.dark .md-body h4 {
+  color: #fbbf24;
+  border-left-color: rgb(251 191 36 / 0.75);
+}
+
+.md-body p {
+  margin: 0.45em 0;
+}
+
+.md-body ul,
+.md-body ol {
+  margin: 0.4em 0 0.7em;
+  padding-left: 1.1em;
+  list-style: disc;
+}
+
+.md-body ol {
+  list-style: decimal;
+}
+
+.md-body li {
+  margin: 0.22em 0;
+}
+
+.md-body strong {
+  font-weight: 600;
+  color: #b45309;
+}
+
+.dark .md-body strong {
+  color: #fcd34d;
+}
+
+.md-body code {
+  background-color: rgb(120 113 108 / 0.14);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  font-size: 0.92em;
+}
+
+.md-body blockquote {
+  margin: 0.6em 0;
+  padding-left: 0.8em;
+  border-left: 3px solid rgb(217 119 6 / 0.5);
+  color: #78716c;
+}
+
+.md-body hr {
+  margin: 0.9em 0;
+  border-color: rgb(120 113 108 / 0.25);
+}
+
+/* ---------------- 打字机光标：跟随最后一段内容 ---------------- */
+.typewriter-caret > *:last-child::after {
+  content: '▍';
+  margin-left: 1px;
+  animation: caret-blink 1s steps(2, start) infinite;
+}
+
+@keyframes caret-blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+@keyframes pop-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, calc(-100% + 4px));
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, calc(-100% - 10px));
+  }
+}
+
+/* ---------------- 错题卡片：单击移除时平滑淡出 ---------------- */
+.card-list-move,
+.card-list-enter-active,
+.card-list-leave-active {
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.card-list-enter-from,
+.card-list-leave-to {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+/* 离场时脱离文档流，让后续卡片平滑上移而不是瞬间塌陷 */
+.card-list-leave-active {
+  position: absolute;
+  width: 100%;
+}
+
+/* ---------------- 轻量 Toast 提示 ---------------- */
+.toast-enter-active,
+.toast-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.toast-enter-from,
+.toast-leave-to {
+  opacity: 0;
+}
+
+.drawer-enter-active,
+.drawer-leave-active {
+  transition: transform 0.22s ease, opacity 0.22s ease;
+}
+
+.drawer-enter-from,
+.drawer-leave-to {
+  opacity: 0;
+  transform: translateX(18px);
+}
+
+/* ---------------- 共用组件样式 ---------------- */
+@layer components {
+  .icon-btn {
+    display: inline-flex;
+    height: 30px;
+    width: 30px;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    color: #78716c;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+
+  .icon-btn:hover:not(:disabled) {
+    background-color: rgb(120 113 108 / 0.12);
+    color: #44403c;
+  }
+
+  .icon-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+  }
+
+  .dark .icon-btn {
+    color: #a8a29e;
+  }
+
+  .dark .icon-btn:hover:not(:disabled) {
+    background-color: rgb(255 255 255 / 0.08);
+    color: #e7e5e4;
+  }
+
+  .input {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--color-paper-200);
+    background-color: transparent;
+    padding: 6px 10px;
+    font-size: 12.5px;
+    line-height: 1.6;
+    color: inherit;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .input::placeholder {
+    color: #a8a29e;
+  }
+
+  .input:focus {
+    border-color: #d97706;
+    box-shadow: 0 0 0 3px rgb(217 119 6 / 0.15);
+  }
+
+  .dark .input {
+    border-color: var(--color-ink-600);
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 1px 7px;
+    font-size: 10.5px;
+    font-weight: 500;
+    line-height: 1.5;
+    white-space: nowrap;
+  }
+
+  .chip-amber {
+    background-color: rgb(217 119 6 / 0.14);
+    color: #b45309;
+  }
+
+  .chip-violet {
+    background-color: rgb(124 58 237 / 0.14);
+    color: #6d28d9;
+  }
+
+  .chip-plain {
+    background-color: rgb(120 113 108 / 0.14);
+    color: #57534e;
+  }
+
+  .dark .chip-amber {
+    color: #fbbf24;
+  }
+
+  .dark .chip-violet {
+    color: #c4b5fd;
+  }
+
+  .dark .chip-plain {
+    color: #d6d3d1;
+  }
+
+  .rail-tab {
+    display: flex;
+    height: 28px;
+    width: 28px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #a8a29e;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+
+  .rail-tab:hover {
+    background-color: rgb(120 113 108 / 0.12);
+    color: #57534e;
+  }
+
+  .rail-tab.is-on {
+    background-color: rgb(217 119 6 / 0.16);
+    color: #b45309;
+  }
+
+  .dark .rail-tab.is-on {
+    color: #fbbf24;
+  }
+
+  .pill-btn {
+    display: inline-flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    border-radius: 8px;
+    border: 1px solid var(--color-paper-200);
+    padding: 6px 8px;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: #57534e;
+    transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+  }
+
+  .pill-btn:hover:not(:disabled) {
+    border-color: #fbbf24;
+    background-color: rgb(217 119 6 / 0.08);
+    color: #b45309;
+  }
+
+  .pill-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  .dark .pill-btn {
+    border-color: var(--color-ink-600);
+    color: #d6d3d1;
+  }
+}
