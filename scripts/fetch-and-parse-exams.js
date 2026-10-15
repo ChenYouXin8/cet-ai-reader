@@ -261,7 +261,7 @@ function parsePaper(markdown, { relPath, fileName }) {
       id: `${category}-${year}-s${setNo}-p${block.no}`,
       category,
       year,
-      title: `${y}年${Number(m)}月${levelLabel}仔细阅读 Passage ${block.no}`,
+      title: `${y}年${Number(m)}月${levelLabel}仔细阅读（第${setNo}套）Passage ${block.no}`,
       content: paragraphs.join('\n\n'),
       questions,
     })
